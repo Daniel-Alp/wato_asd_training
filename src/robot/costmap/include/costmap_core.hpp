@@ -25,8 +25,8 @@ class CostmapCore {
     int scan_width = 30;
     int scan_height = 30;
 
-    int costmap_width = 30;
-    int costmap_height = 30;
+    int costmap_width = 90;
+    int costmap_height = 90;
 };
 }  
 
