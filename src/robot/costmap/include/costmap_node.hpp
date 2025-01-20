@@ -10,10 +10,7 @@ class CostmapNode : public rclcpp::Node {
   public:
     CostmapNode();
     
-    // Place callback function here
-    // void publishMessage();
-
-    void lidar_topic_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) const;
+    void lidar_topic_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg);
  
   private:
     robot::CostmapCore costmap_;
