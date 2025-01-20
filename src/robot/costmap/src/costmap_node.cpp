@@ -1,4 +1,3 @@
-#include <chrono>
 #include <memory>
  
 #include "costmap_node.hpp"
@@ -15,12 +14,10 @@ CostmapNode::CostmapNode() : Node("costmap"), costmap_(robot::CostmapCore(this->
     RCLCPP_INFO(this->get_logger(), "Initialized Costmap Node");
 } 
 
-void CostmapNode::lidar_topic_callback(const sensor_msgs::msg::LaserScan::SharedPtr scan) {
-  // RCLCPP_INFO(this->get_logger(), "Received lidar msg");
-
-  costmap_.update_costmap(scan);
+void CostmapNode::lidar_topic_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg) {
+  costmap_.update_costmap(msg);
   nav_msgs::msg::OccupancyGrid costmap_msg = *(costmap_.costmap_data_);
-  costmap_msg.header = scan->header;
+  costmap_msg.header = msg->header;
   occupancy_grid_pub_->publish(costmap_msg);
 }
 
