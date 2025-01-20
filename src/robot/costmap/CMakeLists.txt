@@ -26,9 +26,12 @@ add_library(costmap_lib
 target_include_directories(costmap_lib
   PUBLIC include)
 # Add ROS2 dependencies required by package
+find_package(nav_msgs REQUIRED) 
 ament_target_dependencies(costmap_lib 
   rclcpp
-  std_msgs # YOU ARE ONLY ADDING THIS TO THE FILE
+  std_msgs
+  nav_msgs
+  # YOU ARE ONLY ADDING THIS TO THE FILE
 )
  
 # Create ROS2 node executable from source files

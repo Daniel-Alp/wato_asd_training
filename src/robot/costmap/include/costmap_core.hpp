@@ -2,6 +2,10 @@
 #define COSTMAP_CORE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
+#include "nav_msgs/msg/occupancy_grid.hpp"
+// #include "sensor_msgs/msg/laser_scan.hpp"
+
+// GET OUT!
 
 namespace robot
 {
@@ -12,6 +16,7 @@ class CostmapCore {
     explicit CostmapCore(const rclcpp::Logger& logger);
 
   private:
+    // nav_msgs::msg::OccupancyGrid costmap_msg_; 
     rclcpp::Logger logger_;
 
 };

@@ -11,13 +11,18 @@ class CostmapNode : public rclcpp::Node {
     CostmapNode();
     
     // Place callback function here
-    void publishMessage();
+    // void publishMessage();
+
+    void lidar_topic_callback(const std_msgs::msg::String::SharedPtr msg) const;
  
   private:
     robot::CostmapCore costmap_;
+
+    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr lidar_sub_;
+
     // Place these constructs here
-    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr string_pub_;
-    rclcpp::TimerBase::SharedPtr timer_;
+    // rclcpp::Publisher<std_msgs::msg::String>::SharedPtr string_pub_;
+    // rclcpp::TimerBase::SharedPtr timer_;
 };
  
 #endif 
