@@ -14,15 +14,21 @@ MapMemoryNode::MapMemoryNode() : Node("map_memory"), map_memory_(robot::MapMemor
         &MapMemoryNode::local_costmap_topic_callback, this, 
         std::placeholders::_1));
 
+
+  global_costmap_pub_ = this->create_publisher<nav_msgs::msg::OccupancyGrid>("/map", 10);
+
   RCLCPP_INFO(this->get_logger(), "Initialized Memory Map Node");
 }
 
 void MapMemoryNode::odom_topic_callback(const nav_msgs::msg::Odometry::SharedPtr msg) {
-    RCLCPP_INFO(this->get_logger(), "Received odom msg");
+
 }
 
 void MapMemoryNode::local_costmap_topic_callback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg) {
-    RCLCPP_INFO(this->get_logger(), "Received local costmap msg");
+  map_memory_.fuse_local_costmap(msg);
+  nav_msgs::msg::OccupancyGrid global_costmap_msg = *(map_memory_.global_costmap_data_);
+  global_costmap_msg.header = msg->header;
+  global_costmap_pub_->publish(global_costmap_msg);
 }
 
 int main(int argc, char ** argv)
